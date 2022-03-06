@@ -1,9 +1,9 @@
-const Hyperswarm = require('..')
+const Bitswarm = require('..')
 const { test, destroyAll, planPromise } = require('./helpers')
 
 test('join peer - can establish direct connections to public keys', async (bootstrap, t) => {
-  const swarm1 = new Hyperswarm({ bootstrap })
-  const swarm2 = new Hyperswarm({ bootstrap })
+  const swarm1 = new Bitswarm({ bootstrap })
+  const swarm2 = new Bitswarm({ bootstrap })
 
   await swarm2.listen() // Ensure that swarm2's public key is being announced
 
@@ -41,7 +41,7 @@ test('join peer - can establish direct connections to public keys', async (boots
 })
 
 test('join peer - attempt to connect to self is a no-op', async (bootstrap, t) => {
-  const swarm = new Hyperswarm({ bootstrap })
+  const swarm = new Bitswarm({ bootstrap })
   await swarm.listen()
 
   swarm.joinPeer(swarm.keyPair.publicKey)
@@ -51,8 +51,8 @@ test('join peer - attempt to connect to self is a no-op', async (bootstrap, t) =
 })
 
 test('leave peer - will stop reconnecting to previously joined peers', async (bootstrap, t) => {
-  const swarm1 = new Hyperswarm({ bootstrap })
-  const swarm2 = new Hyperswarm({ bootstrap })
+  const swarm1 = new Bitswarm({ bootstrap })
+  const swarm2 = new Bitswarm({ bootstrap })
 
   await swarm2.listen() // Ensure that swarm2's public key is being announced
 

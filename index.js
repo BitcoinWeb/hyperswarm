@@ -1,5 +1,5 @@
 const { EventEmitter } = require('events')
-const DHT = require('@hyperswarm/dht')
+const DHT = require('@web4/dht')
 const spq = require('shuffled-priority-queue')
 
 const PeerInfo = require('./lib/peer-info')
@@ -16,7 +16,7 @@ const ERR_MISSING_TOPIC = 'Topic is required and must be a 32-byte buffer'
 const ERR_DESTROYED = 'Swarm has been destroyed'
 const ERR_DUPLICATE = 'Duplicate connection'
 
-module.exports = class Hyperswarm extends EventEmitter {
+module.exports = class Bitswarm extends EventEmitter {
   constructor (opts = {}) {
     super()
     const {

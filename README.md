@@ -1,23 +1,23 @@
-# hyperswarm
+# bitswarm
 
 A high-level API for finding and connecting to peers who are interested in a "topic."
 
-## NOTE: v3
+## NOTE: v1
 
-Note that this is the README for v3 which is tagged under next. To see the v2 documentation/code go to https://github.com/hyperswarm/hyperswarm/tree/v2
+Note that this is the README for v1 which is tagged under next. To see the v1 documentation/code go to https://github.com/bitwebs/bitswarm/tree/v1
 
-As v3 fully matures over the next month it will be shifted to npm latest.
+As v2 fully matures over the next month it will be shifted to npm latest.
 
 ## Installation
 ```
-npm install hyperswarm@next
+npm install @web4/bitswarm
 ```
 
 ## Usage
 ```js
-const Hyperswarm = require('hyperswarm')
-const swarm1 = new Hyperswarm()
-const swarm2 = new Hyperswarm()
+const Bitswarm = require('@web4/bitswarm')
+const swarm1 = new Bitswarm()
+const swarm2 = new Bitswarm()
 
 swarm1.on('connection', (conn, info) => {
  // swarm1 will receive server connections
@@ -38,10 +38,10 @@ await swarm2.flush() // Waits for the swarm to connect to pending peers.
 // After this point, both client and server should have connections
 ```
 
-## Hyperswarm API
+## Bitswarm API
 
-#### `const swarm = new Hyperswarm(opts = {})`
-Construct a new Hyperswarm instance.
+#### `const swarm = new Bitswarm(opts = {})`
+Construct a new Bitswarm instance.
 
 `opts` can include:
 * `keyPair`: A Noise keypair that will be used to listen/connect on the DHT. Defaults to a new key pair.
@@ -56,17 +56,17 @@ A set of all active client/server connections.
 #### `swarm.peers`
 A Map containing all connected peers, of the form: `(Noise public key hex string) -> PeerInfo object`
 
-See the [`PeerInfo`](https://github.com/hyperswarm/hyperswarm/blob/v3/README.md#peerinfo-api) API for more details.
+See the [`PeerInfo`](https://github.com/bitwebs/bitswarm/blob/v2/README.md#peerinfo-api) API for more details.
 
 #### `swarm.dht`
-A [`@hyperswarm/dht`](https://github.com/hyperswarm/dht) instance. Useful if you want lower-level control over Hyperswarm's networking.
+A [`@web4/dht`](https://github.com/bitwebs/dht) instance. Useful if you want lower-level control over Bitswarm's networking.
 
 #### `swarm.on('connection', (socket, peerInfo) => {})`
 Emitted whenever the swarm connects to a new peer.
 
 `socket` is an end-to-end (Noise) encrypted Duplex stream
 
-`peerInfo` is a [`PeerInfo`](https://github.com/hyperswarm/hyperswarm/blob/v3/README.md#peerinfo-api) instance
+`peerInfo` is a [`PeerInfo`](https://github.com/bitwebs/bitswarm/blob/v2/README.md#peerinfo-api) instance
 
 #### `const discovery = swarm.join(topic, opts = {})`
 Start discovering and connecting to peers sharing a common topic. As new peers are connected to, they will be emitted from the swarm as `connection` events.
@@ -76,10 +76,10 @@ Start discovering and connecting to peers sharing a common topic. As new peers a
 * `server`: Accept server connections for this topic by announcing yourself to the DHT. Defaults to `true`.
 * `client`: Actively search for and connect to discovered servers. Defaults to `true`.
 
-Returns a [`PeerDiscovery`](https://github.com/hyperswarm/hyperswarm/blob/v3/README.md#peerdiscovery-api) object.
+Returns a [`PeerDiscovery`](https://github.com/bitwebs/bitswarm/blob/v2/README.md#peerdiscovery-api) object.
 
 #### Clients and Servers
-In Hyperswarm, there are two ways for peers to join the swarm: client mode and server mode. If you've previously used Hyperswarm v2, these were called "lookup" and "announce", but we now think "client" and "server" are more descriptive.
+In Bitswarm, there are two ways for peers to join the swarm: client mode and server mode. If you've previously used Bitswarm qv1, these were called "lookup" and "announce", but we now think "client" and "server" are more descriptive.
 
 When you join a topic as a server, the swarm will start accepting incoming connections from clients (peers that have joined the same topic in client mode). Server mode will announce your keypair to the DHT, so that other peers can discover your server. When server connections are emitted, they are not associated with a specific topic -- the server only knows it received an incoming connection.
 
@@ -109,7 +109,7 @@ Stop attempting direct connections to a known peer.
 If a direct connection is already established, that connection will __not__ be destroyed by `leavePeer`.
 
 #### `const discovery = swarm.status(topic)`
-Get the [`PeerDiscovery`](https://github.com/hyperswarm/hyperswarm/blob/v3/README.md#peerdiscovery-api) object associated with the topic, if it exists.
+Get the [`PeerDiscovery`](https://github.com/bitwebs/bitswarm/blob/v2/README.md#peerdiscovery-api) object associated with the topic, if it exists.
 
 #### `await swarm.listen()`
 Explicitly start listening for incoming connections. This will be called internally after the first `join`, so it rarely needs to be called manually.

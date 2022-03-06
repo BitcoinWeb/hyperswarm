@@ -1,8 +1,8 @@
-const crypto = require('hypercore-crypto')
+const crypto = require('@web4/bitweb-crypto')
 const random = require('math-random-seed')
 const { timeout } = require('nonsynchronous')
 
-const Hyperswarm = require('..')
+const Bitswarm = require('..')
 const { test, destroyAll } = require('./helpers')
 
 const BACKOFFS = [
@@ -12,7 +12,7 @@ const BACKOFFS = [
 ]
 
 test('chaos - recovers after random disconnections (takes ~60s)', async (bootstrap, t) => {
-  const SEED = 'hyperswarm v3'
+  const SEED = 'bitswarm v2'
   const NUM_SWARMS = 10
   const NUM_TOPICS = 15
   const NUM_FORCE_DISCONNECTS = 30
@@ -28,7 +28,7 @@ test('chaos - recovers after random disconnections (takes ~60s)', async (bootstr
   const rand = random(SEED)
 
   for (let i = 0; i < NUM_SWARMS; i++) {
-    const swarm = new Hyperswarm({ bootstrap, backoffs: BACKOFFS, jitter: 0 })
+    const swarm = new Bitswarm({ bootstrap, backoffs: BACKOFFS, jitter: 0 })
     swarms.push(swarm)
     peersBySwarm.set(swarm, new Set())
     swarm.on('connection', conn => {

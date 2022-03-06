@@ -1,6 +1,6 @@
 const tape = require('tape')
-const HyperDHT = require('@hyperswarm/dht')
-const Hyperswarm = require('../../')
+const BitWebDHT = require('@web4/dht')
+const Bitswarm = require('../../')
 
 const CONNECTION_TIMEOUT = 100
 
@@ -28,7 +28,7 @@ function defer () {
 async function swarm (bootstrap, n = 32) {
   const nodes = []
   while (nodes.length < n) {
-    const node = new Hyperswarm({ bootstrap })
+    const node = new Bitswarm({ bootstrap })
     await node.ready()
     nodes.push(node)
   }
@@ -45,7 +45,7 @@ async function test (name, fn, only = false, skip = false) {
     const nodes = []
 
     while (bootstrappers.length < 3) {
-      bootstrappers.push(new HyperDHT({ ephemeral: true, bootstrap: [] }))
+      bootstrappers.push(new BitWebDHT({ ephemeral: true, bootstrap: [] }))
     }
 
     const bootstrap = []
@@ -55,7 +55,7 @@ async function test (name, fn, only = false, skip = false) {
     }
 
     while (nodes.length < 3) {
-      const node = new HyperDHT({ ephemeral: false, bootstrap })
+      const node = new BitWebDHT({ ephemeral: false, bootstrap })
       await node.ready()
       nodes.push(node)
     }
