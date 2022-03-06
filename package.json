@@ -1,6 +1,6 @@
 {
   "name": "@web4/bitswarm",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "A distributed networking stack for connecting peers",
   "dependencies": {
     "@web4/dht": "^2.0.0",
