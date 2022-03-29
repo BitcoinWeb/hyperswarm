@@ -2,7 +2,7 @@
 const peerInfo = require('./lib/peer-info')
 const peerQueue = require('./lib/queue')
 const { EventEmitter } = require('events')
-const network = require('@hyperswarm/network')
+const network = require('@web4/network')
 
 const MAX_SERVER_SOCKETS = Infinity
 const MAX_CLIENT_SOCKETS = Infinity
@@ -12,13 +12,13 @@ const ERR_DESTROYED = 'swarm has been destroyed'
 const ERR_MISSING_KEY = 'key is required and must be a 32-byte buffer'
 const ERR_JOIN_OPTS = 'join options must enable lookup, announce or both, but not neither'
 
-const kDrain = Symbol('hyperswarm.drain')
-const kIncrPeerCount = Symbol('hyperswarm.incrPeerCount')
-const kDecrPeerCount = Symbol('hyperswarm.decrPeerCount')
-const kQueue = Symbol('hyperswarm.queue')
-const kLeave = Symbol('hyperswarm.leave')
-const kFlush = Symbol('hyperswarm.flush')
-const kStatus = Symbol('hyperswarm.statuses')
+const kDrain = Symbol('bitswarm.drain')
+const kIncrPeerCount = Symbol('bitswarm.incrPeerCount')
+const kDecrPeerCount = Symbol('bitswarm.decrPeerCount')
+const kQueue = Symbol('bitswarm.queue')
+const kLeave = Symbol('bitswarm.leave')
+const kFlush = Symbol('bitswarm.flush')
+const kStatus = Symbol('bitswarm.statuses')
 
 module.exports = opts => new Swarm(opts)
 
